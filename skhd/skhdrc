@@ -1,19 +1,14 @@
-# method
-# alt = manipulate windows
-# ctrl = manipulate spaces and desktops
-# meh = manipulate configuration
-# hyper = manipulate environment
-
 ::default : /usr/local/bin/limelight -m config active_color 0xFFFAF6C3
-
-hyper - r : yabai -m space --rotate 90
+::move    : /usr/local/bin/limelight -m config active_color 0xFFff0000
+::resize  : /usr/local/bin/limelight -m config active_color 0xFF00ff00
 
 # MANAGE DISPLAYS
-ctrl - k  : yabai -m display --focus 1 # + 
-ctrl - j  : yabai -m display --focus 2 # -
+ctrl - k  : yabai -m display --focus 1
+ctrl - j  : yabai -m display --focus 2
 ctrl + shift - k: yabai -m window --display 1; yabai -m display --focus 1
 ctrl + shift - j : yabai -m window --display 2; yabai -m display --focus 2
 
+# MANAGE SPACES
 ctrl + shift - 1 : yabai -m window --space 1
 ctrl + shift - 2 : yabai -m window --space 2
 ctrl + shift - 3 : yabai -m window --space 3
@@ -26,34 +21,24 @@ alt - j : yabai -m window --focus south
 alt - k : yabai -m window --focus north
 alt - l : yabai -m window --focus east
 
+# MOVE WINDOWS
 alt + shift - h : yabai -m window --swap west
 alt + shift - j : yabai -m window --swap south
 alt + shift - k : yabai -m window --swap north
 alt + shift - l : yabai -m window --swap east
 
-# BALANCE WINDOWS
-hyper - b : yabai -m space --balance
-
 # RESIZE WINDOW
-::resize : /usr/local/bin/limelight -m config active_color 0xFF00ff00
 resize < escape ; default
+resize < return ; default
 resize < h : yabai -m window --resize right:-30:0 || yabai -m window west --resize right:-30:0
 resize < j : yabai -m window --resize bottom:0:30 || yabai -m window north --resize bottom:0:30
 resize < k : yabai -m window --resize top:0:-30 || yabai -m window south --resize top:0:-30
 resize < l : yabai -m window --resize right:30:0 || yabai -m window west --resize right:30:0
 alt - r ; resize
 
-# TOGGLE SPLIT BETWEEN VERTICAL/HORIZONTAL
-hyper - s: yabai -m space --layout stack
-hyper - t: yabai -m space --layout bsp
-
-# TOGGLE WINDOW FLOATING 
-alt - f : yabai -m window --toggle float;\
-          yabai -m window --grid 4:4:1:0:2:4
-
 # MOVE FLOATING WINDOWS
-::move : /usr/local/bin/limelight -m config active_color 0xFFff0000
 move < return ; default
+move < escape ; default
 move < h : yabai -m window --move rel:-30:0
 move < j : yabai -m window --move rel:-0:30
 move < k : yabai -m window --move rel:-0:-30
@@ -63,12 +48,18 @@ move < 2 : yabai -m window --grid 4:4:1:0:2:4
 move < 3 : yabai -m window --grid 1:3:1:0:2:1
 alt - m ; move
 
-# TOGGLE PADDING
-pagedown : yabai -m space --toggle padding; yabai -m space --toggle gap # hyper - p 
+# TOGGLE WINDOW FLOATING 
+alt - f : yabai -m window --toggle float;\
+          yabai -m window --grid 4:4:1:0:2:4
 
+# CLOSE WINDOW
+alt + shift - backspace : yabai -m window --close
+
+# OPEN WINDOWS
 ::open : /usr/local/bin/limelight -m config active_color 0xFFffa500
 alt - o ; open
 open < escape ; default
+open < return ; default
 open < k : open -a Kitty ; skhd -k 'escape'
 open < s : open -a Spotify ; skhd -k 'escape'
 open < o : open -a OBS ; skhd -k 'escape'
@@ -79,7 +70,24 @@ open < d : open -a Discord ; skhd -k 'escape'
 open < h : open -a Home ; skhd -k 'escape'
 open < b : open -a Bear ; skhd -k 'escape'
 
-meh - r : brew services restart yabai
-alt + shift - backspace : yabai -m window --close
+# OPEN TERMINAL
 alt - return: open -a Kitty
+
+# BALANCE TILED WINDOWS
+hyper - b : yabai -m space --balance
+
+# ROTATE TILED WINDOWS
+hyper - r : yabai -m space --rotate 90
+
+# TOGGLE BETWEEN STACK AND TILED MODES
+hyper - s: yabai -m space --layout stack
+hyper - t: yabai -m space --layout bsp
+
+# TOGGLE TILED PADDING
+pagedown : yabai -m space --toggle padding; yabai -m space --toggle gap # hyper - p 
+ 
+# HIKACJK CMD - TAB
 cmd - tab : yabai -m window --focus "$(yabai -m query --windows --space | jq -re "[sort_by(.id, .frame) | .[] | select(.role == \"AXWindow\" and .subrole == \"AXStandardWindow\") | .id] | nth(index($(yabai -m query --windows --window | jq -re ".id")) - 1)")"
+
+# RESTART YABAI
+meh - r : brew services restart yabai
