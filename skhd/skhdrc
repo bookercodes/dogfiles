@@ -1,93 +1,92 @@
-::default : /usr/local/bin/limelight -m config active_color 0xFFFAF6C3
-::move    : /usr/local/bin/limelight -m config active_color 0xFFff0000
-::resize  : /usr/local/bin/limelight -m config active_color 0xFF00ff00
+::default: /usr/local/bin/limelight -m config active_color 0xFFFAF6C3
 
-# MANAGE DISPLAYS
-ctrl - k  : yabai -m display --focus 1
-ctrl - j  : yabai -m display --focus 2
+# manage displays
+ctrl - k: yabai -m display --focus 1
+ctrl - j: yabai -m display --focus 2
 ctrl + shift - k: yabai -m window --display 1; yabai -m display --focus 1
-ctrl + shift - j : yabai -m window --display 2; yabai -m display --focus 2
+ctrl + shift - j: yabai -m window --display 2; yabai -m display --focus 2
 
-# MANAGE SPACES
-ctrl + shift - 1 : yabai -m window --space 1
-ctrl + shift - 2 : yabai -m window --space 2
-ctrl + shift - 3 : yabai -m window --space 3
-ctrl + shift - 4 : yabai -m window --space 4
-ctrl + shift - 5 : yabai -m window --space 5
+# manage spaces
+ctrl + shift - 1: yabai -m window --space 1
+ctrl + shift - 2: yabai -m window --space 2
+ctrl + shift - 3: yabai -m window --space 3
+ctrl + shift - 4: yabai -m window --space 4
+ctrl + shift - 5: yabai -m window --space 5
 
-# FOCUS WINDOWS
-alt - h : yabai -m window --focus west
-alt - j : yabai -m window --focus south
-alt - k : yabai -m window --focus north
-alt - l : yabai -m window --focus east
+# focus windows
+alt - h: yabai -m window --focus west
+alt - j: yabai -m window --focus south
+alt - k: yabai -m window --focus north
+alt - l: yabai -m window --focus east
 
-# MOVE WINDOWS
-alt + shift - h : yabai -m window --swap west
-alt + shift - j : yabai -m window --swap south
-alt + shift - k : yabai -m window --swap north
-alt + shift - l : yabai -m window --swap east
+# move windows
+alt + shift - h: yabai -m window --swap west
+alt + shift - j: yabai -m window --swap south
+alt + shift - k: yabai -m window --swap north
+alt + shift - l: yabai -m window --swap east
 
-# RESIZE WINDOW
+# resize window
+::resize: /usr/local/bin/limelight -m config active_color 0xFF00ff00
 resize < escape ; default
 resize < return ; default
-resize < h : yabai -m window --resize right:-30:0 || yabai -m window west --resize right:-30:0
-resize < j : yabai -m window --resize bottom:0:30 || yabai -m window north --resize bottom:0:30
-resize < k : yabai -m window --resize top:0:-30 || yabai -m window south --resize top:0:-30
-resize < l : yabai -m window --resize right:30:0 || yabai -m window west --resize right:30:0
+resize < h: yabai -m window --resize right:-30:0 || yabai -m window west --resize right:-30:0
+resize < j: yabai -m window --resize bottom:0:30 || yabai -m window north --resize bottom:0:30
+resize < k: yabai -m window --resize top:0:-30 || yabai -m window south --resize top:0:-30
+resize < l: yabai -m window --resize right:30:0 || yabai -m window west --resize right:30:0
 alt - r ; resize
 
-# MOVE FLOATING WINDOWS
+# move floating windows
+::move : /usr/local/bin/limelight -m config active_color 0xFFff0000
 move < return ; default
 move < escape ; default
-move < h : yabai -m window --move rel:-30:0
-move < j : yabai -m window --move rel:-0:30
-move < k : yabai -m window --move rel:-0:-30
-move < l : yabai -m window --move rel:30:0
-move < 1 : yabai -m window --grid 1:3:0:0:2:1
-move < 2 : yabai -m window --grid 4:4:1:0:2:4
-move < 3 : yabai -m window --grid 1:3:1:0:2:1
+move < h: yabai -m window --move rel:-30:0
+move < j: yabai -m window --move rel:-0:30
+move < k: yabai -m window --move rel:-0:-30
+move < l: yabai -m window --move rel:30:0
+move < 1: yabai -m window --grid 1:3:0:0:2:1
+move < 2: yabai -m window --grid 4:4:1:0:2:4
+move < 3: yabai -m window --grid 1:3:1:0:2:1
 alt - m ; move
 
-# TOGGLE WINDOW FLOATING 
-alt - f : yabai -m window --toggle float;\
-          yabai -m window --grid 4:4:1:0:2:4
+# toggle window floating 
+alt - f: yabai -m window --toggle float; yabai -m window --grid 4:4:1:0:2:4
 
-# CLOSE WINDOW
-alt + shift - backspace : yabai -m window --close
+# close window
+alt + shift - backspace: yabai -m window --close
 
-# OPEN WINDOWS
+# open windows
 ::open : /usr/local/bin/limelight -m config active_color 0xFFffa500
 alt - o ; open
 open < escape ; default
 open < return ; default
-open < k : open -a Kitty ; skhd -k 'escape'
-open < s : open -a Spotify ; skhd -k 'escape'
-open < o : open -a OBS ; skhd -k 'escape'
-open < c : open -a Google\ Chrome ; skhd -k 'escape'
-open < w : open -a Camo\ Studio ; skhd -k 'escape' # w for webcam
-open < f : open -a Finder ; skhd -k 'escape'
-open < d : open -a Discord ; skhd -k 'escape'
-open < h : open -a Home ; skhd -k 'escape'
+open < k: open -a Kitty ; skhd -k 'escape'
+open < s: open -a Spotify ; skhd -k 'escape'
+open < o: open -a OBS ; skhd -k 'escape'
+open < c: open -a Google\ Chrome ; skhd -k 'escape'
+open < w: open -a Camo\ Studio ; skhd -k 'escape' # w for webcam
+open < f: open -a Finder ; skhd -k 'escape'
+open < d: open -a Discord ; skhd -k 'escape'
+open < h: open -a Home ; skhd -k 'escape'
 open < b : open -a Bear ; skhd -k 'escape'
 
-# OPEN TERMINAL
+# open terminal
 alt - return: open -a Kitty
 
-# BALANCE TILED WINDOWS
-hyper - b : yabai -m space --balance
+# balance tiled windows
+hyper - b: yabai -m space --balance
 
-# ROTATE TILED WINDOWS
-hyper - r : yabai -m space --rotate 90
+# rotate tiled windows
+hyper - r: yabai -m space --rotate 90
 
-# TOGGLE BETWEEN STACK AND TILED MODES
+# toggle between stack and tiled modes
 hyper - s: yabai -m space --layout stack
 hyper - t: yabai -m space --layout bsp
 
-# TOGGLE TILED PADDING
-pagedown : yabai -m space --toggle padding; yabai -m space --toggle gap # hyper - p 
+# toggle tiled padding
+pagedown: yabai -m space --toggle padding; yabai -m space --toggle gap # pagedown = "hyper - p"
  
-# HIKACJK CMD - TAB
-cmd - tab : yabai -m window --focus "$(yabai -m query --windows --space | jq -re "[sort_by(.id, .frame) | .[] | select(.role == \"AXWindow\" and .subrole == \"AXStandardWindow\") | .id] | nth(index($(yabai -m query --windows --window | jq -re ".id")) - 1)")"
+# switch windows
+cmd - tab: yabai -m window --focus "$(yabai -m query --windows --space | jq -re "[sort_by(.id, .frame) | .[] | select(.role == \"AXWindow\" and .subrole == \"AXStandardWindow\") | .id] | nth(index($(yabai -m query --windows --window | jq -re ".id")) - 1)")"
 
-# RESTART YABAI
-meh - r : brew services restart yabai
+# restart yabai
+meh - r: brew services restart yabai
