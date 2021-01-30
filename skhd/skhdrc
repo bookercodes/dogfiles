@@ -67,7 +67,7 @@ open < w: open -a Camo\ Studio ; skhd -k 'escape' # w for webcam
 open < f: open -a Finder ; skhd -k 'escape'
 open < d: open -a Discord ; skhd -k 'escape'
 open < h: open -a Home ; skhd -k 'escape'
-open < b : open -a Bear ; skhd -k 'escape'
+open < b: open -a Bear ; skhd -k 'escape'
 
 # open terminal
 alt - return: open -a Kitty
